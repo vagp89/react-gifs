@@ -1,11 +1,20 @@
 import React from 'react';
 
+const noop = () => true;
+
 const Gif = ({
-  id
+  id,
+  gifClassName,
+  onClick = noop,
 }) => {
   const src = `https://media3.giphy.com/media/${id}/200.gif`;
   return (
-    <img src={src} alt="" className="gif-center" />
+    <img
+      src={src}
+      alt=""
+      className={gifClassName}
+      onClick={() => onClick(id)}
+    />
   );
 };
 

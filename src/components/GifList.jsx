@@ -10,11 +10,21 @@ import Gif from './Gif';
 // export default GifList;
 
 const GifList = ({
-  gifs
+  gifs,
+  gifClassName = '',
+  onClick,
 }) => {
   return (
-    <div className="gift-list">
-      {gifs.map(gif => <Gif id={gif.id} key={gif.id} />)}
+    <div className="gif-list">
+      {
+        gifs.map(gif => (
+          <Gif
+            onClick={onClick}
+            gifClassName={gifClassName}
+            id={gif.id}
+            key={gif.id}
+          />))
+      }
     </div>
   );
 };

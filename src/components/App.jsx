@@ -10,7 +10,7 @@ class App extends Component {
 
     this.state = {
       gifs: [],
-      selectedGifId: "cfuL5gqFDreXxkWQ4o"
+      selectedGifId: ""
     };
     this.search("homer, thinking");
   }
@@ -19,27 +19,32 @@ class App extends Component {
     giphy('sgwTqFgyTbXT2DOoaQw88h9CYmuGFRnH').search({
       q: query,
       rating: 'g',
-      limit: 6
+      limit:20
     }, (error, result) => {
-      //update the state
       this.setState({
         gifs: result.data
       });
     });
   }
 
+  onClick = (id) => {
+    this.setState({
+      selectedGifId: id
+    });
+  }
+
   render() {
+    const { selectedGifId, gifs } = this.state;
     return (
       <div>
-        <h1> Giphy Single Page Application</h1>
         <div className="left-scene">
           <SearchBar onSearch={this.search} />
           <div className="selected-gif">
-            <Gif id={this.state.selectedGifId} />
+            <Gif gifClassName="gif-left-scene" id={selectedGifId} />
           </div>
         </div>
         <div className="right-scene">
-          <GifList gifs={this.state.gifs} />
+          <GifList onClick={this.onClick} gifClassName="gif-right-scene" gifs={gifs} />
         </div>
       </div>
     );
